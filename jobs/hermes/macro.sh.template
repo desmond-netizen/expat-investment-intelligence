@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Replace this placeholder before copying the file into ~/.hermes/scripts/.
+REPO_DIR="/absolute/path/to/investment-intelligence-macro-social-innovation"
+
+cd "$REPO_DIR"
+mkdir -p reports
+exec "$REPO_DIR/.venv/bin/investment-intelligence" macro \
+  --output "$REPO_DIR/reports/macro-$(date +%F).json"

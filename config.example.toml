@@ -1,0 +1,21 @@
+# Public, non-secret configuration. Copy to config.toml for local edits.
+
+[output]
+# Output is written only when --output is supplied. Otherwise commands write JSON to stdout.
+format = "json"
+
+[macro]
+# Include the optional EIA energy inventory collector when EIA_API_KEY is configured.
+include_energy = false
+
+[social]
+# Start with local JSON input. Add only a provider that complies with source terms.
+max_items = 20
+
+[innovation]
+# Public Hugging Face Hub discovery endpoint.
+limit = 20
+
+[markets]
+# Public Polymarket Gamma metadata endpoint. No trading or order placement occurs.
+limit = 100

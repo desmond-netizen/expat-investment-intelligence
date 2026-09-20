@@ -1,0 +1,14 @@
+# Copy selected lines into crontab after replacing /absolute/path/to/repo.
+# Jobs write files locally. They do not send messages or post to webhooks.
+
+# Macro overview, weekday morning
+0 8 * * 1-5 cd /absolute/path/to/repo && ./.venv/bin/investment-intelligence macro --output reports/macro-$(date +\%F).json
+
+# Public prediction-market metadata, weekday morning
+20 8 * * 1-5 cd /absolute/path/to/repo && ./.venv/bin/investment-intelligence markets --output reports/markets-$(date +\%F).json
+
+# Innovation watch, weekly
+0 9 * * 1 cd /absolute/path/to/repo && ./.venv/bin/investment-intelligence innovation --output reports/innovation-$(date +\%F).json
+
+# Social signals from an approved local export, weekly
+0 10 * * 1 cd /absolute/path/to/repo && ./.venv/bin/investment-intelligence social --input examples/social-posts.example.json --output reports/social-$(date +\%F).json
