@@ -5,11 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "investment-intelligence"
 version = "0.1.0"
-description = "Public, output-first research jobs for macro, social listening, and innovation."
+description = "Research alerts for investors who earn, save, and invest across currencies."
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
-authors = [{name = "Investment Intelligence contributors"}]
+authors = [{name = "Expat Investment Intelligence contributors"}]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Financial and Insurance Industry",
@@ -23,8 +23,8 @@ dependencies = []
 investment-intelligence = "investment_intelligence.__main__:main"
 
 [project.urls]
-Homepage = "https://github.com/desmond-netizen/investment-intelligence-macro-social-innovation"
-Issues = "https://github.com/desmond-netizen/investment-intelligence-macro-social-innovation/issues"
+Homepage = "https://github.com/desmond-netizen/expat-investment-intelligence"
+Issues = "https://github.com/desmond-netizen/expat-investment-intelligence/issues"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

@@ -9,7 +9,7 @@ from urllib.parse import urlencode, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 DEFAULT_TIMEOUT_SECONDS = 20
-DEFAULT_USER_AGENT = "investment-intelligence/0.1 (+https://github.com/desmond-netizen/investment-intelligence-macro-social-innovation)"
+DEFAULT_USER_AGENT = "investment-intelligence/0.1 (+https://github.com/desmond-netizen/expat-investment-intelligence)"
 
 
 class FetchError(RuntimeError):

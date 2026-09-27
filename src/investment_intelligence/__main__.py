@@ -14,6 +14,7 @@ from .macro import build_macro_snapshot
 from .markets import build_market_report
 from .render import write_or_print
 from .social import build_social_report, load_posts
+from .trend import build_trend_report, load_closes
 
 APPROVED_ENVIRONMENT_VARIABLES = {"EIA_API_KEY", "SOCIAL_PROVIDER_API_KEY"}
 
@@ -69,6 +70,15 @@ def build_parser() -> argparse.ArgumentParser:
     markets = subparsers.add_parser("markets", help="Collect public prediction-market metadata")
     markets.add_argument("--limit", type=_positive_int, default=100)
     markets.add_argument("--output", type=Path, help="Write JSON to this path instead of stdout")
+
+    trend = subparsers.add_parser("trend", help="Check trend-turn research triggers from a local closes file")
+    trend.add_argument("--closes", type=Path, required=True, help="CSV with date, symbol, and close columns")
+    trend.add_argument("--symbols", required=True, help="Comma-separated symbols to check")
+    trend.add_argument("--benchmark", default="QQQ", help="Benchmark symbol for relative strength")
+    trend.add_argument("--sma", type=_positive_int, default=50, help="Moving-average length in sessions")
+    trend.add_argument("--rs-window", type=_positive_int, default=60, help="Relative-strength lookback in sessions")
+    trend.add_argument("--rs-quiet", type=_positive_int, default=10, help="Sessions with no new relative-strength low")
+    trend.add_argument("--output", type=Path, help="Write JSON to this path instead of stdout")
     return parser
 
 
@@ -89,6 +99,17 @@ def main(argv: list[str] | None = None) -> int:
             "social": lambda: (build_social_report(load_posts(args.input), limit=args.limit), args.output),
             "innovation": lambda: (build_innovation_report(limit=args.limit), args.output),
             "markets": lambda: (build_market_report(limit=args.limit), args.output),
+            "trend": lambda: (
+                build_trend_report(
+                    load_closes(args.closes),
+                    symbols=[symbol.strip() for symbol in args.symbols.split(",") if symbol.strip()],
+                    benchmark=args.benchmark,
+                    sma=args.sma,
+                    rs_window=args.rs_window,
+                    rs_quiet=args.rs_quiet,
+                ),
+                args.output,
+            ),
         }
         payload, output = handlers[args.command]()
         write_or_print(payload, output)

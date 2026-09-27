@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Replace this placeholder before copying the file into ~/.hermes/scripts/.
-REPO_DIR="/absolute/path/to/investment-intelligence-macro-social-innovation"
+REPO_DIR="/absolute/path/to/expat-investment-intelligence"
 
 cd "$REPO_DIR"
 mkdir -p reports

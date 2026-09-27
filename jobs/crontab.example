@@ -12,3 +12,6 @@
 
 # Social signals from an approved local export, weekly
 0 10 * * 1 cd /absolute/path/to/repo && ./.venv/bin/investment-intelligence social --input examples/social-posts.example.json --output reports/social-$(date +\%F).json
+
+# Trend-turn research triggers from a closes file you refresh yourself, weekday evening
+30 18 * * 1-5 cd /absolute/path/to/repo && ./.venv/bin/investment-intelligence trend --closes data/closes.csv --symbols AAA,BBB --output reports/trend-$(date +\%F).json
